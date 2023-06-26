@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Ревин</title>
+    <meta charset="utf-8">
+</head>
+<body style="background-color:#d5dfeb">
+    <p><strong>Модель</strong></p>
+    <ul>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.1.html">Главная</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.2.html">Задачи</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.3.html">Форма регистрации и входа</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.4.html">Форма обратной связи</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.5.html">Тест</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.6.html">Модель</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="#">Вкладка 7</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.8.html">Видеоуроки</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.9.html">Книги</a></li>
+        <li style="display: inline-block; padding: 5px"><a href="Ekzamen1.10.html">Об авторе</a></li>
+    </ul>
+    <div style="border:5px solid black;height:700px;width:1500px">
+        <table>
+            <tr> <td><input id="pole2" type="text" placeholder="Ответ" /></td> <td><input id="knopka2" type="button" value="Вычислить" onclick="visota()" /></td> </tr>
+            <tr> <td> <p>Поля для проверки.</p> </td></tr>
+            <tr> <td><input id="pole3" type="text" placeholder="L1/L2" /></td> </tr>
+            <tr> <td><input id="pole4" type="text" placeholder="H/h" /></td> </tr>
+        </table>
+        <img src="11.png" id="kartinka1" style="height: 400px; width: 300px; position: absolute; border-block-color: #d5dfeb" onmousedown="DATA1()" />
+        <img src="22.png" id="kartinka2" style="height:600px;width:300px;position:absolute" />
+        <table id="zerkalo" style="border: solid; background-color: blue; border-color: blue;width:200px; height: 10px; position: absolute " onmousedown="DATA2()"></table>
+    </div>
+    <script>
+        var chelovek = document.getElementById("kartinka1");
+        var objekt = document.getElementById("kartinka2");
+        var pole2 = document.getElementById("pole2");
+        var pole3 = document.getElementById("pole3");
+        var pole4 = document.getElementById("pole4");
+
+        var zerkalo = document.getElementById("zerkalo");
+        var hod;
+        var hod2;
+
+        chelovek.style.left = 40 + 'px';
+        chelovek.style.top = 308 + 'px';
+
+        objekt.style.left = 1200 + 'px';
+        objekt.style.top = 108 + 'px';
+
+        zerkalo.style.left = 650 + 'px';
+        zerkalo.style.top = 680 + 'px';
+
+        function DATA1() {
+            chelovek.ondragstart = function () {
+                return false;
+            };
+
+            chelovek.onmousedown = function (e) {
+                moveAt(e);
+            }
+            function moveAt(e) {
+                hod = e.pageX - chelovek.offsetWidth / 2;
+                if (hod <= 25) {
+                    hod = 25;
+                } else if (hod >= 300) {
+                    hod = 300;
+
+                }
+                chelovek.style.left = hod + 'px';
+            }
+
+            document.onmousemove = function (e) {
+                moveAt(e);
+            }
+
+            chelovek.onmouseup = function () {
+                document.onmousemove = null;
+                chelovek.onmousedown = null;
+                chelovek.onmouseup = null;
+            }
+        }
+        function DATA2() {
+            zerkalo.ondragstart = function () {
+                return false;
+            };
+
+            zerkalo.onmousedown = function (e) {
+                moveAt(e);
+            }
+            function moveAt(e) {
+                hod2 = e.pageX - zerkalo.offsetWidth / 2;
+                if (hod2 <= 500) {
+                    hod2 = 500;
+                } else if (hod2 >= 900) {
+                    hod2 = 900;
+
+                }
+                zerkalo.style.left = hod2 + 'px';
+            }
+
+            document.onmousemove = function (e) {
+                moveAt(e);
+            }
+
+            zerkalo.onmouseup = function () {
+                document.onmousemove = null;
+                zerkalo.onmousedown = null;
+                zerkalo.onmouseup = null;
+            }
+        }
+        function visota() {
+            var XCHEL = chelovek.style.left;
+            var XZER = zerkalo.style.left;
+            var XSHKAF = objekt.style.left;
+
+            var L2 = parseInt(XZER) - parseInt(XCHEL);
+            var L1 = (parseInt(XSHKAF) - objekt.offsetWidth / 2) - parseInt(XZER);
+            var h = 350;
+            var H = (L1 * h) / L2;
+
+            pole2.value = Math.round(H);
+
+            var L1L2 = L1 / L2;
+            var Hh = H / h;
+            pole3.value = L1L2;
+            pole4.value = Hh;
+
+            console.log(XCHEL);
+            console.log(XZER);
+            console.log(XSHKAF);
+            console.log('L2 ' + L2);
+            console.log('L1 ' + L1);
+
+        }
+        
+    </script>
+</body>
+</html>
